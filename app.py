@@ -107,10 +107,11 @@ if not os.environ.get("OPENAI_API_KEY"):
     This app needs an OpenAI API key. Some features use fallback methods when the API is unavailable.
     """)
 elif not openai_available:
-    st.sidebar.warning("""
-    ⚠️ **OpenAI API Connection Issue** 
+    st.sidebar.info("""
+    ℹ️ **Using Fallback Methods** 
     
-    There's a problem connecting to the OpenAI API. The app will use fallback methods.
+    The OpenAI API key has insufficient quota or is experiencing connection issues. 
+    The app is using built-in fallback methods that don't require the API.
     """)
 else:
     st.sidebar.success("""
