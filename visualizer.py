@@ -201,36 +201,36 @@ def generate_mind_map(memories, max_connections=50):
     )
     
     # Create figure
-    fig = go.Figure(
-        data=edge_traces + [node_trace],
-        layout=go.Layout(
-            title='Memory Mind Map',
-            showlegend=True,
-            hovermode='closest',
-            margin=dict(b=20, l=5, r=5, t=40),
-            annotations=[ dict(
-                text="Hover over nodes to see memory details",
-                showarrow=False,
-                xref="paper", yref="paper",
-                x=0.005, y=-0.002
-            )],
-            xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-            yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-            plot_bgcolor='rgba(248,248,248,1)',
-            paper_bgcolor='rgba(248,248,248,1)',
-            legend=dict(
-                x=1.05,
-                y=0.5,
-                traceorder='normal',
-                font=dict(
-                    family='sans-serif',
-                    size=12,
-                    color='#000'
-                ),
-                bgcolor='#fff',
-                bordercolor='#ddd',
-                borderwidth=1
-            )
+    fig = go.Figure(data=edge_traces + [node_trace])
+    
+    # Add layout configuration separately
+    fig.update_layout(
+        title='Memory Mind Map',
+        showlegend=True,
+        hovermode='closest',
+        margin=dict(b=20, l=5, r=5, t=40),
+        annotations=[ dict(
+            text="Hover over nodes to see memory details",
+            showarrow=False,
+            xref="paper", yref="paper",
+            x=0.005, y=-0.002
+        )],
+        xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+        plot_bgcolor='rgba(248,248,248,1)',
+        paper_bgcolor='rgba(248,248,248,1)',
+        legend=dict(
+            x=1.05,
+            y=0.5,
+            traceorder='normal',
+            font=dict(
+                family='sans-serif',
+                size=12,
+                color='#000'
+            ),
+            bgcolor='#fff',
+            bordercolor='#ddd',
+            borderwidth=1
         )
     )
     
