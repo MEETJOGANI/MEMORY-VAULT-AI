@@ -21,8 +21,12 @@ try:
             max_tokens=5
         )
         openai_available = True
+        print("OpenAI API connection successful!")
 except Exception as e:
     print(f"OpenAI initialization error: {e}")
+    # If there's an insufficient_quota error, that means the key is valid but has no credits
+    if "insufficient_quota" in str(e):
+        print("API key is valid but has insufficient quota. Using fallback methods.")
     # We'll use fallback methods when OpenAI is not available
 
 def process_memory(text):
