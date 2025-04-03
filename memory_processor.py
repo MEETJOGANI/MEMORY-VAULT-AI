@@ -2,11 +2,28 @@ import os
 from openai import OpenAI
 import json
 
-# Initialize OpenAI client
+# Initialize OpenAI client with error handling
 # the newest OpenAI model is "gpt-4o" which was released May 13, 2024.
 # do not change this unless explicitly requested by the user
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-client = OpenAI(api_key=OPENAI_API_KEY)
+
+# Flag to track if OpenAI is available
+openai_available = False
+client = None
+
+try:
+    if OPENAI_API_KEY:
+        client = OpenAI(api_key=OPENAI_API_KEY)
+        # Test with a simple request to verify the API key works
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": "Hello"}],
+            max_tokens=5
+        )
+        openai_available = True
+except Exception as e:
+    print(f"OpenAI initialization error: {e}")
+    # We'll use fallback methods when OpenAI is not available
 
 def process_memory(text):
     """
