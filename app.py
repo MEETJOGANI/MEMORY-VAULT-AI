@@ -7,7 +7,8 @@ from memory_processor import (
     generate_memory_embedding,
     recall_memories,
     summarize_memories,
-    analyze_emotion
+    analyze_emotion,
+    openai_available  # Import flag that indicates if OpenAI API is working
 )
 from data_store import (
     save_memory,
@@ -97,13 +98,25 @@ st.markdown("### Your Digital Brain for Life Moments")
 st.sidebar.image("icon.svg", width=50)
 st.sidebar.title("MemoryVault AI")
 
-# Check for OpenAI API key
+# Check for OpenAI API key and availability
 import os
 if not os.environ.get("OPENAI_API_KEY"):
     st.sidebar.warning("""
     ⚠️ **API Key Required** 
     
     This app needs an OpenAI API key. Some features use fallback methods when the API is unavailable.
+    """)
+elif not openai_available:
+    st.sidebar.warning("""
+    ⚠️ **OpenAI API Connection Issue** 
+    
+    There's a problem connecting to the OpenAI API. The app will use fallback methods.
+    """)
+else:
+    st.sidebar.success("""
+    ✅ **OpenAI API Connected** 
+    
+    The app is using OpenAI's AI capabilities for enhanced features.
     """)
 
 # Navigation
